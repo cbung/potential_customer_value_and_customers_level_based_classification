@@ -133,21 +133,21 @@ for num_col in numerical_variables:
     overview_num_col(df, num_col, plot=True)
     print("-------------------------------------")
 
-# Use groupby to see average PRICE for other variables.
+# I used groupby to see average PRICE for other variables.
 agg_df = df.groupby(["COUNTRY", "SOURCE", "SEX", "AGE"]).agg({"PRICE": "mean"})
 
-# Sort dataframe in a descending order by PRICE.
+# I sorted dataframe in a descending order by PRICE.
 agg_df.sort_values(by="PRICE", ascending=False, inplace=True)
 agg_df.reset_index(inplace=True)
 
-# Create a new categorical varible using AGE variable.
+# I defined a new categorical varible using AGE variable.
 cut_bins = [0, 16, 22, 30, 40, agg_df["AGE"].max()]
 cut_labels = ["0_16", "17_22", "23_30", "31_40", "41_" + str(agg_df["AGE"].max())]
 agg_df["AGE_CAT"] = pd.cut(agg_df["AGE"], cut_bins, labels=cut_labels)
 agg_df["AGE_CAT"].unique()
 str(agg_df["AGE_CAT"].dtype)
 
-# Create one variable that has all the info you need and get rid of the other ones.
+# I defined one variable that has all the info you need and get rid of the other ones.
 agg_df["customers_level_based"] = ["_".join(val).upper() for val in agg_df[["COUNTRY", "SOURCE", "SEX", "AGE_CAT"]].values]
 agg_df = agg_df[["customers_level_based", "PRICE"]]
 
@@ -157,7 +157,7 @@ agg_df["customers_level_based"].value_counts()
 agg_df = agg_df.groupby("customers_level_based").agg({"PRICE": "mean"})
 agg_df.reset_index(inplace=True)
 
-# Define a new variable named "SEGMENT" and segmentize customers based on their value.
+# I defined a new variable named "SEGMENT" and segmentize customers based on their value.
 agg_df["SEGMENT"] = pd.qcut(agg_df["PRICE"], 5, labels=["low", "low-mid", "mid", "high-mid", "high"])
 agg_df.groupby("SEGMENT").agg({"PRICE": ["mean", "min", "max", "sum"]})
 
