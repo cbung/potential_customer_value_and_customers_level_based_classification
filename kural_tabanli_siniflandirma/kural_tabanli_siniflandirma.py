@@ -2,7 +2,8 @@ import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
 
-# region Information about persona.csv:
+
+df = pd.read_csv("persona.csv")
 
 # Persona.csv Variables:
 # --------------------------------
@@ -11,10 +12,6 @@ import matplotlib.pyplot as plt
 # Sex: Customer Sex
 # Country: Customer Country
 # Age: Customer Age
-
-# endregion
-
-df = pd.read_csv("persona.csv")
 
 
 def overview_df(dataframe):
@@ -25,7 +22,7 @@ def overview_df(dataframe):
     ----------
     dataframe: DataFrame
         Name of the dataframe
-
+        
     """
     print(f"------------------------------------ OVERVIEW ------------------------------------")
     print(f"------------------------------------")
