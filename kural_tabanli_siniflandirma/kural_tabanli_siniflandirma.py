@@ -162,7 +162,6 @@ agg_df["SEGMENT"] = pd.qcut(agg_df["PRICE"], 5, labels=["low", "low-mid", "mid",
 agg_df.groupby("SEGMENT").agg({"PRICE": ["mean", "min", "max", "sum"]})
 
 
-# Get customer information from user and check new customers' segmentation.
 def get_new_customer():
     """
     Create a new entry
@@ -210,4 +209,5 @@ def show_new_customer():
     print(agg_df[agg_df["customers_level_based"] == get_new_customer()])
 
 
+# Get customer information from user and check new customers' segmentation.
 show_new_customer()
